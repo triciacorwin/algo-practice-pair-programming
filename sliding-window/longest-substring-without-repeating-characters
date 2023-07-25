@@ -1,0 +1,51 @@
+// export function findLongestSubstring(str) {
+//     // initialize variables
+//     let maxLength = 0;
+//     let start = 0;
+//     let cache = new Map();
+
+//     // iterate over input str
+//         // check if curr char is in cache
+//         // if not, add it to cache
+//         // if yes, update window length based on the position of last time the repeated char is seen
+//         // if window length is greater than maxLength, update maxLength
+//     for (let end = 0; end < str.length; ++end) {
+//         if (!cache.has(str[end])) {
+//             cache.set(str[end], end);
+//         } else {
+//           if (cache.get(str[end]) >= start) {
+//               start = cache.get(str[end]) + 1;
+//               if (end-start + 1 > maxLength) maxLength = end - start + 1;
+//           } 
+//           cache.set(str[end], end);
+//         };
+//         maxLength = Math.max(end - start + 1, maxLength); 
+//     }
+    
+//     // return maxLength
+//     return maxLength;
+// }
+
+
+export function findLongestSubstring(str) {
+    // initialize variables
+    let maxLength = 0;
+    let start = 0;
+    let cache = new Map();
+
+    // iterate over input str
+        // update start value if curr char is repeated 
+            // if curr char is in cache and after start value // update start index to curr char + 1
+        // update index of curr char
+        // update maxLength by checking current window length
+    for (let end = 0; end < str.length; ++end) {
+        if (cache.get(str[end]) >= start) {
+            start = cache.get(str[end]) + 1;
+        } 
+        cache.set(str[end], end);
+        maxLength = Math.max(end - start + 1, maxLength); 
+    };
+    
+    // return maxLength
+    return maxLength;
+}
